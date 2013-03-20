@@ -19,6 +19,7 @@
         <th>Задача</th>
         <th>Срок</th>
         <th>Завешена</th>
+        <th>Статус</th>
         <th>Комментарий</th>
         <th>Операции</th>
     </tr>
@@ -28,8 +29,16 @@
             <td>{{ item.title }}</td>
             <td>{{ item.due_date }}</td>
             <td>{{ item.finish_date }}</td>
-            <td>{{ item.comment }}</td>
+            <td>{{ item.get_status_display }}</td>
+            <td>{{ item.comment|linebreaks }}</td>
             <td>
+                {% if item.status == 'C' %}
+                    <a href="complete/{{ item.id }}">Завершить</a>
+                {% endif %}
+                {% if item.status == 'R' %}
+                    <a href="uncomplete/{{ item.id }}">Возобновить</a>
+                {% endif %}
+                <a href="edit/{{ item.id }}">Редактировать</a>
                 <a href="delete/{{ item.id }}">Удалить</a>
             </td>
         </tr>

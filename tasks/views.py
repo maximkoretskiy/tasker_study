@@ -1,10 +1,10 @@
 # Create your views here.
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from models import Task, TaskAddForm
+from models import Task, TaskAddForm, TaskEditForm
 
 @login_required
 def dash(request):
@@ -14,11 +14,28 @@ def dash(request):
     return render_to_response('tasks/dash.html', locals() )
 
 def task_delete(request, task_id):
-    try:
-        Task.objects.get(pk=task_id).delete()
-    except:
-        pass
+    task = get_object_or_404(Task,pk=task_id)
+    task.status = 'A'
+    task.save()
     return HttpResponseRedirect(reverse('dashboard'))
+
+def task_edit(request, task_id):
+    task = get_object_or_404(Task,pk=task_id)
+    if request.method == 'POST':
+        form = TaskEditForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('dashboard'))
+    else:
+        form = TaskEditForm(instance=task)
+
+    return render_to_response('tasks/add_task.html', RequestContext(request ,locals()) )
+
+def task_status(request, task_id, status):
+    task = get_object_or_404(Task,pk=task_id)
+    task.complete(status)
+    return HttpResponseRedirect(reverse('dashboard'))
+
 
 def task_add(request):
     if request.method == 'POST':
@@ -28,10 +45,6 @@ def task_add(request):
             task.executor = request.user
             task.save()
             return HttpResponseRedirect(reverse('dashboard'))
-
-        else:
-            pass
-        #assert False
     else:
         form = TaskAddForm()
 
