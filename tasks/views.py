@@ -13,6 +13,13 @@ def dash(request):
     quoter_list = Task.objects.filter(executor_id=request.user.id, level='Q')
     return render_to_response('tasks/dash.html', locals() )
 
+def task_delete(request, task_id):
+    try:
+        Task.objects.get(pk=task_id).delete()
+    except:
+        pass
+    return HttpResponseRedirect(reverse('dashboard'))
+
 def task_add(request):
     if request.method == 'POST':
         form = TaskAddForm(request.POST)

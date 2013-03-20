@@ -29,7 +29,9 @@
             <td>{{ item.due_date }}</td>
             <td>{{ item.finish_date }}</td>
             <td>{{ item.comment }}</td>
-            <td><i>Операции</i></td>
+            <td>
+                <a href="delete/{{ item.id }}">Удалить</a>
+            </td>
         </tr>
     {% endfor %}
 </table>
