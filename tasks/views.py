@@ -8,7 +8,7 @@ from models import Task, TaskAddForm, TaskEditForm
 
 @login_required
 def dash(request):
-    title = 'Список задач'
+    page_title = 'Список задач'
     week_list = Task.objects.filter(executor_id=request.user.id, level='W')
     month_list = Task.objects.filter(executor_id=request.user.id, level='M')
     quoter_list = Task.objects.filter(executor_id=request.user.id, level='Q')
@@ -22,6 +22,7 @@ def task_delete(request, task_id):
 
 def task_edit(request, task_id):
     task = get_object_or_404(Task,pk=task_id)
+    page_title = u"Редактирование задачи %s" % task.title
     if request.method == 'POST':
         form = TaskEditForm(request.POST, instance=task)
         if form.is_valid():
@@ -39,6 +40,7 @@ def task_status(request, task_id, status):
 
 
 def task_add(request):
+    page_title = "Создание задачи"
     if request.method == 'POST':
         form = TaskAddForm(request.POST)
         if form.is_valid():
