@@ -1,4 +1,4 @@
-# Create your views here.
+# coding=utf-8
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
@@ -8,6 +8,7 @@ from models import Task, TaskAddForm, TaskEditForm
 
 @login_required
 def dash(request):
+    title = 'Список задач'
     week_list = Task.objects.filter(executor_id=request.user.id, level='W')
     month_list = Task.objects.filter(executor_id=request.user.id, level='M')
     quoter_list = Task.objects.filter(executor_id=request.user.id, level='Q')

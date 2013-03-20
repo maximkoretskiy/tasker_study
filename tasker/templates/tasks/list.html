@@ -1,19 +1,8 @@
-<style>
-    table {
-        border-collapse: collapse;
-    }
-
-    table tr td,
-    table tr th{
-        border: 1px solid black;
-        padding: 0 5px;
-    }
-</style>
 <h2>{{ header }}</h2>
 
 {{ form.errors }}
 
-<table>
+<table class="table table-condensed">
     <tr>
         <th>Проект</th>
         <th>Задача</th>
@@ -32,14 +21,18 @@
             <td>{{ item.get_status_display }}</td>
             <td>{{ item.comment|linebreaks }}</td>
             <td>
-                {% if item.status == 'C' %}
-                    <a href="complete/{{ item.id }}">Завершить</a>
-                {% endif %}
-                {% if item.status == 'R' %}
-                    <a href="uncomplete/{{ item.id }}">Возобновить</a>
-                {% endif %}
-                <a href="edit/{{ item.id }}">Редактировать</a>
-                <a href="delete/{{ item.id }}">Удалить</a>
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        {% if item.status == 'C' %}
+                            <a class='btn' href="complete/{{ item.id }}"><i class="icon-ok"></i></a>
+                        {% endif %}
+                        {% if item.status == 'R' %}
+                            <a class='btn' href="uncomplete/{{ item.id }}"><i class="icon-repeat"></i></a>
+                        {% endif %}
+                        <a class="btn" href="edit/{{ item.id }}"><i class="icon-edit"></i></a>
+                        <a class="btn" href="delete/{{ item.id }}"><i class="icon-trash"></i></a>
+                    </div>
+                </div>
             </td>
         </tr>
     {% endfor %}
