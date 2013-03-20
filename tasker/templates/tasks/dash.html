@@ -1,5 +1,7 @@
 <h1>Текущие задачи</h1>
 
+<a href="add">Добавить задачу</a>
+
 {% include "tasks/list.html" with header='На неделю' form=form context='W' list=week_list %}
 {% include "tasks/list.html" with header='На месяц' form=form context='M' list=month_list %}
 {% include "tasks/list.html" with header='На квартал' form=form context='Q' list=quoter_list %}

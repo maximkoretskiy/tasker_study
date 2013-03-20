@@ -32,23 +32,4 @@
             <td><i>Операции</i></td>
         </tr>
     {% endfor %}
-    <tr>
-        <form action='add' method="POST ">{% csrf_token %}
-            <input type="hidden" name="level" value="{{ context }}">
-            <td>
-                {{ form.project }}
-            </td>
-            <td>
-                {{ form.title }}
-            </td>
-            <td>
-                {{ form.due_date }}
-            </td>
-            <td></td>
-            <td></td>
-            <td>
-                <input type="submit" value="Добавить">
-            </td>
-        </form>
-    </tr>
 </table>
