@@ -1,0 +1,54 @@
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table tr td,
+    table tr th{
+        border: 1px solid black;
+        padding: 0 5px;
+    }
+</style>
+<h2>{{ header }}</h2>
+
+{{ form.errors }}
+
+<table>
+    <tr>
+        <th>Проект</th>
+        <th>Задача</th>
+        <th>Срок</th>
+        <th>Завешена</th>
+        <th>Комментарий</th>
+        <th>Операции</th>
+    </tr>
+    {% for item in list %}
+        <tr>
+            <td>{{ item.project }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.due_date }}</td>
+            <td>{{ item.finish_date }}</td>
+            <td>{{ item.comment }}</td>
+            <td><i>Операции</i></td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <form action='add' method="POST ">{% csrf_token %}
+            <input type="hidden" name="level" value="{{ context }}">
+            <td>
+                {{ form.project }}
+            </td>
+            <td>
+                {{ form.title }}
+            </td>
+            <td>
+                {{ form.due_date }}
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="submit" value="Добавить">
+            </td>
+        </form>
+    </tr>
+</table>
