@@ -1,39 +1,38 @@
-<h2>{{ header }}</h2>
-
-{{ form.errors }}
-
-<table class="table table-condensed">
+<tr>
+    <td colspan="8">
+        <h2>{{ header }}</h2>
+    </td>
+</tr>
+<tr>
+    <th>Проект</th>
+    <th>Задача</th>
+    <th>Срок</th>
+    <th>Завешена</th>
+    <th>Статус</th>
+    <th>Комментарий</th>
+    <th>Операции</th>
+</tr>
+{% for item in list %}
     <tr>
-        <th>Проект</th>
-        <th>Задача</th>
-        <th>Срок</th>
-        <th>Завешена</th>
-        <th>Статус</th>
-        <th>Комментарий</th>
-        <th>Операции</th>
-    </tr>
-    {% for item in list %}
-        <tr>
-            <td>{{ item.project }}</td>
-            <td>{{ item.title }}</td>
-            <td>{{ item.due_date }}</td>
-            <td>{{ item.finish_date }}</td>
-            <td>{{ item.get_status_display }}</td>
-            <td>{{ item.comment|linebreaks }}</td>
-            <td>
-                <div class="btn-toolbar">
-                    <div class="btn-group">
-                        {% if item.status == 'C' %}
-                            <a class='btn' href="complete/{{ item.id }}"><i class="icon-ok"></i></a>
-                        {% endif %}
-                        {% if item.status == 'R' %}
-                            <a class='btn' href="uncomplete/{{ item.id }}"><i class="icon-repeat"></i></a>
-                        {% endif %}
-                        <a class="btn" href="edit/{{ item.id }}"><i class="icon-edit"></i></a>
-                        <a class="btn" href="delete/{{ item.id }}"><i class="icon-trash"></i></a>
-                    </div>
+        <td>{{ item.project }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.due_date }}</td>
+        <td>{{ item.finish_date }}</td>
+        <td>{{ item.get_status_display }}</td>
+        <td>{{ item.comment|linebreaks }}</td>
+        <td>
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    {% if item.status == 'C' %}
+                        <a class='btn btn-small' href="complete/{{ item.id }}"><i class="icon-ok"></i></a>
+                    {% endif %}
+                    {% if item.status == 'R' %}
+                        <a class='btn btn-small' href="uncomplete/{{ item.id }}"><i class="icon-repeat"></i></a>
+                    {% endif %}
+                    <a class="btn btn-small" href="edit/{{ item.id }}"><i class="icon-edit"></i></a>
+                    <a class="btn btn-small" href="delete/{{ item.id }}"><i class="icon-trash"></i></a>
                 </div>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
+            </div>
+        </td>
+    </tr>
+{% endfor %}
