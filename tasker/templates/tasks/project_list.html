@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{% url 'project_create' %}">Создать проект</a>
+    
+<table class="table">
+    <tr>
+        <th>Название</th>
+        <th>Операции</th>
+    </tr>
+{% for p in object_list %}
+    <tr>
+        <td>
+            <a href="{% url 'project_update' pk=p.id %}">
+                {{ p.title }}
+            </a>
+        </td>
+        <td>
+            <a href="{%  url 'project_delete' pk=p.id %}">Удалить</a>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

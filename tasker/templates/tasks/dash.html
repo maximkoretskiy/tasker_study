@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load bootstrap_toolkit %}
-{% block h1 %}Текущие задачи{% endblock %}
 {% block content %}
 <a href="add">Добавить задачу</a>
+<a href="{% url 'project_list' %}">Проеккты</a>
 
 <table class="table">
     {% include "tasks/list.html" with header='На неделю' form=form context='W' list=week_list %}
