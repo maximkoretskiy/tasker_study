@@ -8,6 +8,21 @@
     {% bootstrap_javascript_tag %}
 </head>
 <body>
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">TodoList++</a>
+        <ul class="nav">
+            {% url "dashboard" as dash_url %}
+            <li {% if request.path == dash_url %}class="active"{% endif %}>
+                <a href="{{ dash_url }}">Текущие задачи</a>
+            </li>
+            {% url "project_list" as project_url %}
+            <li {% if request.path == project_url %}class="active"{% endif %}>
+                <a href="{{ project_url }}">Проекты</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="container">
     <div class="page-header">
         <h1>{{ page_title }}</h1>

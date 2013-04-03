@@ -61,7 +61,6 @@ def task_add(request):
     return render_to_response('tasks/add_task.html', RequestContext(request ,locals()) )
 
 
-@login_required
 def _change_context(parent,**kwargs):
     context = super(parent.__class__, parent).get_context_data(**kwargs)
     context['page_title'] = parent.page_title
